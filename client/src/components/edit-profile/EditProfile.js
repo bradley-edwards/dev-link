@@ -196,10 +196,9 @@ class CreateProfile extends Component {
               <Link to="/dashboard" className="btn btn-light">
                 Go Back
               </Link>
-              <button type="button" className="btn btn-light ml-3"
+              {/* <button type="button" className="btn btn-light ml-3"
               onClick={() =>
                 this.setState({
-                  displaySocialInputs: false,
                   handle: '',
                   company: '',
                   website: '',
@@ -218,7 +217,7 @@ class CreateProfile extends Component {
               }
                 >
                 Clear All Fields
-              </button>
+            </button> */}
               <h1 className="display-4 text-center">Edit Profile</h1>
               <small className="d-block pb-3">* = required fields</small>
               <form onSubmit={this.onSubmit}>
