@@ -3,9 +3,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 const passport = require('passport');
 
-//Post model
+// Post model
 const Post = require('../../models/Post');
-//Profile model
+// Profile model
 const Profile = require('../../models/Profile');
 
 // Validation
@@ -14,7 +14,7 @@ const validatePostInput = require('../../validation/post');
 // @route   GET api/posts/test
 // @desc    Tests post route
 // @access  Public
-router.get('/test', (req, res) => res.json({ msg: "Posts Works" }));
+router.get('/test', (req, res) => res.json({ msg: 'Posts Works' }));
 
 // @route   GET api/posts
 // @desc    Get posts
@@ -63,7 +63,6 @@ router.post(
   }
 );
 
-
 // @route   DELETE api/posts/:id
 // @desc    Delete post
 // @access  Private
@@ -88,7 +87,6 @@ router.delete(
     });
   }
 );
-
 
 // @route   POST api/posts/like/:id
 // @desc    Like post
