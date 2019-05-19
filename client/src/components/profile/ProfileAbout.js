@@ -37,7 +37,6 @@ class ProfileAbout extends Component {
             </div>
           </div>
         </div>
-        <h1>TODO: About</h1>
       </div>
     );
   }

@@ -7,18 +7,20 @@ import ProfileAbout from './ProfileAbout';
 import ProfileCreds from './ProfileCreds';
 import ProfileGithub from './ProfileGithub';
 import Spinner from '../common/Spinner';
-import { getProfileByHandle } from '../../actions/profileActions';
+import { getProfileByHandle, getProfileById } from '../../actions/profileActions';
 
 class Profile extends Component {
   componentDidMount() {
-    if (this.props.match.params.handle) {
+    if (this.props.match.params.id) {
+      this.props.getProfileById(this.props.match.params.id);
+    } else if (this.props.match.params.handle) {
       this.props.getProfileByHandle(this.props.match.params.handle);
     }
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile.profile === null && this.props.profile.loading) {
-      this.props.history.push('/not-found');
+      //this.props.history.push('/not-found');
     }
   }
 
@@ -33,9 +35,14 @@ class Profile extends Component {
         <div>
           <div className="row">
             <div className="col-md-6">
-              <Link to="/profiles" className="btn btn-light mb-3 float-left">
-                Back To Profiles
-              </Link>
+              {window.location.href.includes("/handle/") ?
+                <Link to="/profiles" className="btn btn-light mb-3 mr-3 float-left">
+                  Back To Profiles
+                </Link> :
+                <Link to="/feed" className="btn btn-light mb-3 mr-3 float-left">
+                  Back To Posts
+                </Link>
+              }
             </div>
             <div className="col-md-6" />
           </div>
@@ -45,10 +52,12 @@ class Profile extends Component {
             education={profile.education}
             experience={profile.experience}
           />
-          {profile.githubusername ? (
-            <ProfileGithub username={profile.githubusername} />
-          ) : null}
-        </div>
+          {
+            profile.githubusername ? (
+              <ProfileGithub username={profile.githubusername} />
+            ) : null
+          }
+        </div >
       );
     }
 
@@ -66,6 +75,7 @@ class Profile extends Component {
 
 Profile.propTypes = {
   getProfileByHandle: PropTypes.func.isRequired,
+  getProfileById: PropTypes.func.isRequired,
   profile: PropTypes.object.isRequired
 };
 
@@ -73,4 +83,4 @@ const mapStateToProps = state => ({
   profile: state.profile
 });
 
-export default connect(mapStateToProps, { getProfileByHandle })(Profile);
+export default connect(mapStateToProps, { getProfileByHandle, getProfileById })(Profile);

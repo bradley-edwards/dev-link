@@ -6,7 +6,6 @@ import { logoutUser } from '../../actions/authActions';
 import { clearCurrentProfile } from '../../actions/profileActions';
 
 class Navbar extends Component {
-
   onLogoutClick(e) {
     e.preventDefault();
     this.props.clearCurrentProfile();
@@ -19,13 +18,28 @@ class Navbar extends Component {
     const authLinks = (
       <ul className="navbar-nav ml-auto">
         <li className="nav-item">
-          <Link className="nav-link" to="/dashboard">
-            Dashboard
-            </Link>
+          <Link className="nav-link" to="/feed">
+            Post Feed
+          </Link>
         </li>
         <li className="nav-item">
-          <a href="/" onClick={this.onLogoutClick.bind(this)} className="nav-link">
-            <img className="rounded-circle" src={user.avatar} alt={user.name} style={{ width: '25px', marginRight: '5px' }} title="You must have a Gravatar connect to your email to display an image" />
+          <Link className="nav-link" to="/dashboard">
+            Dashboard
+          </Link>
+        </li>
+        <li className="nav-item">
+          <a
+            href="/"
+            onClick={this.onLogoutClick.bind(this)}
+            className="nav-link"
+          >
+            <img
+              className="rounded-circle"
+              src={user.avatar}
+              alt={user.name}
+              style={{ width: '25px', marginRight: '5px' }}
+              title="You must have a Gravatar connected to your email to display an image"
+            />{' '}
             Logout
           </a>
         </li>
@@ -37,12 +51,12 @@ class Navbar extends Component {
         <li className="nav-item">
           <Link className="nav-link" to="/register">
             Sign Up
-            </Link>
+          </Link>
         </li>
         <li className="nav-item">
           <Link className="nav-link" to="/login">
             Login
-            </Link>
+          </Link>
         </li>
       </ul>
     );
@@ -53,31 +67,38 @@ class Navbar extends Component {
           <Link className="navbar-brand" to="/">
             DevLink
           </Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#mobile-nav">
-            <span className="navbar-toggler-icon"></span>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#mobile-nav"
+          >
+            <span className="navbar-toggler-icon" />
           </button>
 
           <div className="collapse navbar-collapse" id="mobile-nav">
             <ul className="navbar-nav mr-auto">
               <li className="nav-item">
-                <Link className="nav-link" to="/profiles"> Developers
-            </Link>
+                <Link className="nav-link" to="/profiles">
+                  {' '}
+                  Developers
+                </Link>
               </li>
             </ul>
             {isAuthenticated ? authLinks : guestLinks}
           </div>
         </div>
       </nav>
-    )
+    );
   }
 }
 
 Navbar.propTypes = {
   logoutUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
-}
+};
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   auth: state.auth
 });
 
