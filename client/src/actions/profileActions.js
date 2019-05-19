@@ -47,6 +47,25 @@ export const getProfileByHandle = handle => dispatch => {
     );
 };
 
+// Get profile by id
+export const getProfileById = id => dispatch => {
+  dispatch(setProfileLoading());
+  axios
+    .get(`/api/profile/user/${id}`)
+    .then(res =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: res.data
+      })
+    )
+    .catch(err =>
+      dispatch({
+        type: GET_PROFILE,
+        payload: null
+      })
+    );
+};
+
 // Create Profile
 export const createProfile = (profileData, history) => dispatch => {
   axios
@@ -124,8 +143,9 @@ export const deleteEducation = id => dispatch => {
 
 // Get all profiles
 export const getProfiles = () => dispatch => {
+  dispatch(setProfileLoading());
   axios
-    .get(`/api/profile/all`)
+    .get('/api/profile/all')
     .then(res =>
       dispatch({
         type: GET_PROFILES,
@@ -139,7 +159,6 @@ export const getProfiles = () => dispatch => {
       })
     );
 };
-
 
 // Delete account & profile
 export const deleteAccount = () => dispatch => {
