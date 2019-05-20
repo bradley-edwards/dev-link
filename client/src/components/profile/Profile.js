@@ -40,7 +40,7 @@ class Profile extends Component {
                   Back To Profiles
                 </Link> :
                 <Link to="/feed" className="btn btn-light mb-3 mr-3 float-left">
-                  Back To Posts
+                  Back To Feed
                 </Link>
               }
             </div>
